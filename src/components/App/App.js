@@ -1,10 +1,15 @@
 import React, { useState, useReducer } from 'react'
 
+const REDUCER_ACTION = {
+  SUBTRACT: 'subtract',
+  ADD: 'add',
+}
+
 const stateReducer = (state, action) => {
   switch (action.type) {
-    case 'subtract':
+    case REDUCER_ACTION.SUBTRACT:
       return { count: state.count - 1 }
-    case 'add':
+    case REDUCER_ACTION.ADD:
       return { count: state.count + 1 }
   }
 }
@@ -20,11 +25,11 @@ export default function App() {
 
   return (
     <div>
-      <button data-type={'subtract'} onClick={changeCount}>
+      <button data-type={REDUCER_ACTION.SUBTRACT} onClick={changeCount}>
         -
       </button>
       <span>{state.count}</span>
-      <button data-type={'add'} onClick={changeCount}>
+      <button data-type={REDUCER_ACTION.ADD} onClick={changeCount}>
         +
       </button>
     </div>
