@@ -1,22 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
+
+const stateReducer = (state, action) => {
+  switch (action.type) {
+    case 'subtract':
+      return { count: state.count - 1 }
+    case 'add':
+      return { count: state.count + 1 }
+  }
+}
 
 export default function App() {
-  const [count, setCount] = useState(() => {
-    return 0
-  })
+  const [state, dispatch] = useReducer(stateReducer, { count: 0 })
 
-  const addCount = () => {
-    setCount((prev) => prev + 1)
-  }
-  const subtractCount = () => {
-    setCount((prev) => prev - 1)
+  const changeCount = (e) => {
+    const type = e.currentTarget.dataset.type
+
+    dispatch({ type: type })
   }
 
   return (
     <div>
-      <button onClick={subtractCount}>-</button>
-      <span>{count}</span>
-      <button onClick={addCount}>+</button>
+      <button data-type={'subtract'} onClick={changeCount}>
+        -
+      </button>
+      <span>{state.count}</span>
+      <button data-type={'add'} onClick={changeCount}>
+        +
+      </button>
     </div>
   )
 }
