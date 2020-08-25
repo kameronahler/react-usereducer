@@ -11,6 +11,8 @@ const stateReducer = (state, action) => {
       return { count: state.count - 1 }
     case REDUCER_ACTION.ADD:
       return { count: state.count + 1 }
+    default:
+      console.log('something went wrong')
   }
 }
 
